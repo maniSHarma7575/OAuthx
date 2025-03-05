@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/maniSHarma7575/oauthx/issues"
   },
-  "homepage": "https://github.com/maniSHarma7575/oauthx#readme",
+  "homepage": "https://github.com/maniSHarma7575/oauthx#readme.md",
   "devDependencies": {
     "@eslint/js": "^9.21.0",
     "eslint": "^9.21.0",
