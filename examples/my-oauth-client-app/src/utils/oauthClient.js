@@ -1,8 +1,9 @@
-import { OAuthXClient } from "@manisharma7575/oauthx";
+import { OAuthXClient } from "oauthx";
 
 export const oauthClient = new OAuthXClient({
   server: import.meta.env.VITE_AUTH_SERVER,
   client_id: import.meta.env.VITE_CLIENT_ID,
+  client_secret: import.meta.env.VITE_CLIENT_SECRET,
   redirect_uri: import.meta.env.VITE_REDIRECT_URI,
   tokenEndpoint: import.meta.env.VITE_TOKEN_ENDPOINT,
 });

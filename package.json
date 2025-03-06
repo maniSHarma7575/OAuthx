@@ -1,6 +1,6 @@
 {
   "name": "@manisharma7575/oauthx",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A lightweight and developer-friendly OAuth 2.0 client library for secure authentication and seamless token management. OAuthx simplifies the integration of OAuth 2.0 authentication flows, including authorization code, PKCE and refresh token handling.",
   "main": "index.js",
   "scripts": {
