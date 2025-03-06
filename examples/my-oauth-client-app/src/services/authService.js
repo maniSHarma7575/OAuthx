@@ -1,5 +1,5 @@
 import { oauthClient, AUTH_SERVER } from "../utils/oauthClient";
-import { PKCE } from "oauthx";
+import { PKCE } from "@manisharma7575/oauthx";
 
 const REFRESH_TOKEN_KEY = "refresh_token";
 const ACCESS_TOKEN_KEY = "access_token";

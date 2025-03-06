@@ -1,12 +1,10 @@
-import { OAuthXClient } from "oauthx";
-
-const server = "https://dev-hyrlm5qytsf4favx.us.auth0.com";
+import { OAuthXClient } from "@manisharma7575/oauthx";
 
 export const oauthClient = new OAuthXClient({
-  server: server,
-  client_id: "IzzJCDF5bfktrcfOeatVfDRn4ochjwiW",
-  redirect_uri: "http://localhost:3000",
-  tokenEndpoint: "/oauth/token",
+  server: import.meta.env.VITE_AUTH_SERVER,
+  client_id: import.meta.env.VITE_CLIENT_ID,
+  redirect_uri: import.meta.env.VITE_REDIRECT_URI,
+  tokenEndpoint: import.meta.env.VITE_TOKEN_ENDPOINT,
 });
 
-export const AUTH_SERVER = server;
+export const AUTH_SERVER = import.meta.env.VITE_AUTH_SERVER;
