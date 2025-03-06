@@ -19,14 +19,18 @@ const useAuth = () => {
         accessToken = tokenRespone?.access_token;
       }
 
-      if (accessToken) {
+      if (accessToken && !userData) {
         setToken(accessToken);
         const userInfo = await fetchUserData(accessToken);
         setUserData(userInfo);
       }
 
       // Remove auth params from URL
-      window.history.replaceState(null, "", window.location.pathname);
+      const urlParams = new URLSearchParams(window.location.search);
+
+      if (urlParams.has("code")) {
+        window.history.replaceState(null, "", window.location.pathname);
+      }
     };
 
     initializeAuth();

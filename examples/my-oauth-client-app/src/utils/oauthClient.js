@@ -1,4 +1,4 @@
-import { OAuthXClient } from "oauthx";
+import { OAuthXClient } from "@manisharma7575/oauthx";
 
 export const oauthClient = new OAuthXClient({
   server: import.meta.env.VITE_AUTH_SERVER,
