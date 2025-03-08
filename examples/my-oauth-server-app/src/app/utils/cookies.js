@@ -77,5 +77,6 @@ export function flushCookieHeaders() {
   headers.append("Set-Cookie", "access_token=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0");
   headers.append("Set-Cookie", "refresh_token=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0");
   headers.append("Set-Cookie", "code_verifier=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0");
+  headers.append("Set-Cookie", "access_token_expires_at=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0");
   return headers;
 }

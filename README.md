@@ -8,7 +8,6 @@ OAuthX is a lightweight OAuth 2.0 client library that simplifies authentication 
 - Implicit
 
 ## Scope of Improvement
-- Example for the Server Side Rendering
 - Integrating Client Credentials Flow
 - Jest test
 
@@ -22,13 +21,30 @@ npm install @manisharma7575/oauthx
 
 ## Demo Application
 
-[https://oauthx.netlify.app/](https://oauthx.netlify.app/)
 
+- Client Side: [https://oauthx.netlify.app/](https://oauthx.netlify.app/)
+- Server Side Rendering: [https://o-authx.vercel.app/](https://o-authx.vercel.app/)
+
+### Run in Local
+
+#### Client Side
 ```sh
 cd examples/my-oauth-client-app
 ```
 
 Make sure the credentails are set in the `.env` file
+
+```shell
+npm install
+npm run dev
+```
+
+#### Server Side
+```sh
+cd examples/my-oauth-server-app
+```
+
+Make sure the credentails are set in the `.env.local` file
 
 ```shell
 npm install
