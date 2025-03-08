@@ -13,7 +13,7 @@ export default function UserProfile({ name, email, picture }) {
           className="profile-picture"
         />
       )}
-      <h1 className="title">Name: {name}!</h1>
+      <h1 className="title">Name: {name}</h1>
       <p className="text-gray">Email: {email}</p>
       <a href="/api/logout" className="button logout">
         Logout

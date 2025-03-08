@@ -1,10 +1,10 @@
-import { getAccessToken } from "@/app/utils/serverAuth";
+import { getAccessToken } from "@/app/utils/cookies";
 import { AUTH_SERVER } from "../../utils/oauthClient";
 
 export async function GET() {
   try {
     const accessToken = await getAccessToken();
-    const response = await fetch(`${AUTH_SERVER}/user-info`, {
+    const response = await fetch(`${AUTH_SERVER}/userinfo`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
 

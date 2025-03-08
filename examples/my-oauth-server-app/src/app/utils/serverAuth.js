@@ -1,25 +1,16 @@
-import { cookies } from "next/headers";
 import { oauthClient } from "./oauthClient";
 import { PKCE } from "@manisharma7575/oauthx";
-
-export async function getAccessToken() {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("access_token")?.value;
-
-  if (!token) throw new Error("Unauthorized");
-  return token;
-}
+import { setCookie, deleteCookie, getCodeVerifier } from "./cookies";
 
 export async function initiateLoginFlow() {
   try {
     const verifier = await PKCE.generateRandomCodeVerifier();
-    setCookie("code_verifier", verifier);
+    await setCookie("code_verifier", verifier);
 
     const authUrl = oauthClient.getAuthorizeURI({
       response_type: "code",
       scope: ["openid", "profile", "email", "offline_access"],
-      code_verifier: verifier,
-      state: "random_state"
+      codeVerifier: verifier,
     });
 
     return authUrl;
@@ -29,16 +20,37 @@ export async function initiateLoginFlow() {
   }
 }
 
-async function setCookie(name, value) {
-  const cookieStore = await cookies();
-  cookieStore.set(name, value, {
-    httpOnly: true,
-    secure: isEnvProduction(),
-    sameSite: "lax",
-    path: "/",
-  });
-}
+export async function handleAuthCallback(uri) {
+  try {
+    const codeVerifier = await getCodeVerifier();
 
-function isEnvProduction() {
-  return process.env.NODE_ENV === "production";
+    if (!codeVerifier) {
+      throw new Error("Missing required parameters");
+    }
+
+    const oauth2Token = await oauthClient.handleCallback({
+      grant_type: "authorization_code",
+      uri,
+      code_verifier: codeVerifier,
+    });
+
+    if(oauth2Token.refresh_token){
+      await setCookie("refresh_token", oauth2Token.refresh_token, {
+        maxAge: 60 * 60 * 24 * 30,
+      });
+    }
+    await setCookie("access_token", oauth2Token.access_token, {
+      maxAge: oauth2Token.expires_in,
+    });
+    const currentTime = Math.floor(Date.now() / 1000);
+    await setCookie("access_token_expires_at", String(currentTime + oauth2Token.expires_in), {
+      maxAge: oauth2Token.expires_in,
+    });
+    deleteCookie("code_verifier");
+
+    return "/";
+  } catch (error) {
+    console.error("Callback error:", error);
+    throw new Error("Failed to handle callback. Please try again.");
+  }
 }
